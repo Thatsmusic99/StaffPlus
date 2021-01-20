@@ -8,7 +8,7 @@
     <description>The ultimate moderation plugin.</description>
     <artifactId>StaffPlus</artifactId>
     <packaging>pom</packaging>
-    <version>3.3.3.3</version>
+    <version>3.3.4.0</version>
 
     <modules>
         <module>StaffPlusAPI</module>
@@ -56,10 +56,10 @@
             <id>mikeprim-repo</id>
             <url>https://repo.mikeprimm.com/</url>
         </repository>
-        <!--       <repository>-->
-        <!--            <id>qball-repo</id>-->
-        <!--            <url>https://qball.frostalf.net</url>-->
-        <!--        </repository>-->
+        <repository>
+            <id>Qballs-repo</id>
+            <url>https://repo.qballl.net</url>
+        </repository>
         <repository>
             <id>placeholderapi</id>
             <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>

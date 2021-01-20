@@ -62,11 +62,19 @@ public class PlayerInteract implements Listener {
                         && !player.isSneaking()) {
                     event.setCancelled(true);
                     Container container = (Container) event.getClickedBlock().getState();
-                    Inventory chestView = Bukkit.createInventory(event.getPlayer(), container.getInventory().getSize());
-                    chestView.setContents(container.getInventory().getContents());
-                    event.getPlayer().openInventory(chestView);
-                    StaffPlus.get().viewedChest.put(chestView, event.getClickedBlock());
-                    StaffPlus.get().inventoryHandler.addVirtualUser(player.getUniqueId());
+                    if(container.getInventory().getType().equals(InventoryType.CHEST)) {
+                        Inventory chestView = Bukkit.createInventory(event.getPlayer(), container.getInventory().getSize());
+                        chestView.setContents(container.getInventory().getContents());
+                        event.getPlayer().openInventory(chestView);
+                        StaffPlus.get().viewedChest.put(chestView, event.getClickedBlock());
+                        StaffPlus.get().inventoryHandler.addVirtualUser(player.getUniqueId());
+                    }else{
+                        Inventory chestView = Bukkit.createInventory(event.getPlayer(), container.getInventory().getType());
+                        chestView.setContents(container.getInventory().getContents());
+                        event.getPlayer().openInventory(chestView);
+                        StaffPlus.get().viewedChest.put(chestView, event.getClickedBlock());
+                        StaffPlus.get().inventoryHandler.addVirtualUser(player.getUniqueId());
+                    }
                 }
             } else {
 
