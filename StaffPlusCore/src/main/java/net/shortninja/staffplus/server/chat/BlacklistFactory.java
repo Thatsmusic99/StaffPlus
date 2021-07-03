@@ -60,10 +60,16 @@ public class BlacklistFactory {
 
     private String checkIllegalWords() {
         String newMessage = censoredMessage;
-
-        for (String word : newMessage.split(" ")) {
+        /*for (String word : newMessage.split(" ")) {
             if (isIn(words, word.toLowerCase()) && !isBypassable(word.toLowerCase())) {
                 newMessage = censor(newMessage, word);
+                hasChanged = true;
+            }
+
+        }*/
+        for(String word : words){
+            if(newMessage.contains(word)){
+                newMessage = censor(newMessage,word);
                 hasChanged = true;
             }
         }

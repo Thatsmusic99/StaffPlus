@@ -41,7 +41,7 @@ public class ReportsGui extends AbstractGui {
 
             @Override
             public boolean shouldClose() {
-                return true;
+                return false;
             }
 
             @Override

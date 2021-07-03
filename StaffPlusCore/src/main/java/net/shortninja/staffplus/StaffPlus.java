@@ -181,7 +181,7 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
         languageFile = new LanguageFile();
         messages = new Messages();
         userManager = new UserManager(this);
-        securityHandler = new SecurityHandler(); // FIXME
+        //securityHandler = new SecurityHandler(); // FIXME
         hookHandler = new HookHandler();
         cpsHandler = new CpsHandler();
         freezeHandler = new FreezeHandler();
@@ -298,7 +298,7 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
         options = null;
         languageFile = null;
         userManager = null;
-        securityHandler = null; // FIXME
+        //securityHandler = null; // FIXME
         cpsHandler = null;
         freezeHandler = null;
         gadgetHandler = null;

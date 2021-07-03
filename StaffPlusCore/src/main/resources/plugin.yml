@@ -3,5 +3,5 @@ name: StaffPlus
 version: ${project.version}
 description: The ultimate moderation plugin!
 author: Shortninja,Qball
-softdepend: [PacketListenerApi, PlaceholderAPI]
+softdepend: [PlaceholderAPI, UserLogin ]
 api-version: 1.13

@@ -36,7 +36,7 @@ public class MinerGui extends AbstractGui {
 
             @Override
             public boolean shouldClose() {
-                return true;
+                return false;
             }
 
             @Override

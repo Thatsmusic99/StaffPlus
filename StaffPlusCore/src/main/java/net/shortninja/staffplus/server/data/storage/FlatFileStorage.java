@@ -95,7 +95,7 @@ public class FlatFileStorage implements IStorage {
     public List<IWarning> getWarnings(UUID uuid) {
         List<IWarning> warnings = new ArrayList<>();
 
-        for (String string : dataFile.getStringList(uuid.toString() + ".warnings")) {
+        for (String string : StaffPlus.get().dataFile.getConfiguration().getStringList(uuid.toString() + ".warnings")) {
             String[] parts = string.split(";");
             UUID issuerUuid = UUID.fromString(parts[2]);
             String offlineName = Bukkit.getOfflinePlayer(issuerUuid).getName();
