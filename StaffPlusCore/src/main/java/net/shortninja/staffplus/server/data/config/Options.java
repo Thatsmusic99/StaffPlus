@@ -23,7 +23,7 @@ import java.util.*;
 
 //TODO: replace this with something that isn't horribly coupled...
 public class Options implements IOptions {
-    private static final int CURRENT_VERSION = 6204;
+    private static final int CURRENT_VERSION = 6206;
     private static FileConfiguration config = StaffPlus.get().getConfig();
     private InputStream stream = StaffPlus.get().getResource("config.yml");
 
@@ -117,6 +117,7 @@ public class Options implements IOptions {
     public boolean modeEnableOnLogin = config.getBoolean("staff-mode.enable-on-login");
     public List<String> preLoginBlock = JavaUtils.stringToList("stafff-mode.prelogin-blocked-commands");
     public boolean staffView = config.getBoolean("staff-mode.staff-see-staff-in-mode");
+    public boolean forceStaffChat = configVersion < 6206 ? config.getBoolean("staff-mode.force_staffchat") : false;
     /*
      * Compass
      */
@@ -398,7 +399,6 @@ public class Options implements IOptions {
         }
 
         for (String key : config.getConfigurationSection("").getKeys(true)) {
-            System.out.println(key);
 
             if (!key.contains(".")) {
                 currentKey = key;

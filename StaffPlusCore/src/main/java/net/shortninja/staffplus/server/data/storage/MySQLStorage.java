@@ -130,7 +130,11 @@ public class MySQLStorage implements IStorage {
                 while (rs.next()) {
                     UUID playerUUID = UUID.fromString(rs.getString("Player_UUID"));
                     UUID warnerUuid = UUID.fromString(rs.getString("Warner_UUID"));
-                    String warnerName = warnerUuid.equals(StaffPlus.get().consoleUUID) ? "Console" : Bukkit.getPlayer(warnerUuid).getDisplayName();
+                    String warnerName = "";
+                    if(Bukkit.getPlayer(warnerUuid) != null) {
+                        warnerName = warnerUuid.equals(StaffPlus.get().consoleUUID) ? "Console" : Bukkit.getPlayer(warnerUuid).getDisplayName();
+                    }else
+                        warnerName = "Unknown User";
                     int id = rs.getInt("ID");
                     //NPE \/
                     warnings.add(new Warning(playerUUID, Bukkit.getPlayer(playerUUID).getDisplayName(), id, rs.getString("Reason"), warnerName, warnerUuid, System.currentTimeMillis()));

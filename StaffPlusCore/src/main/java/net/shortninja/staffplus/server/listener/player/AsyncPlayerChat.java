@@ -2,6 +2,7 @@ package net.shortninja.staffplus.server.listener.player;
 
 import net.shortninja.staffplus.StaffPlus;
 import net.shortninja.staffplus.player.UserManager;
+import net.shortninja.staffplus.player.attribute.mode.ModeCoordinator;
 import net.shortninja.staffplus.player.attribute.mode.handler.FreezeHandler;
 import net.shortninja.staffplus.server.AlertCoordinator;
 import net.shortninja.staffplus.server.chat.BlacklistFactory;
@@ -32,6 +33,7 @@ public class AsyncPlayerChat implements Listener {
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
     private ChatHandler chatHandler = StaffPlus.get().chatHandler;
     private AlertCoordinator alertCoordinator = StaffPlus.get().alertCoordinator;
+    private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
     public AsyncPlayerChat() {
         Bukkit.getPluginManager().registerEvents(this, StaffPlus.get());
@@ -41,6 +43,11 @@ public class AsyncPlayerChat implements Listener {
     public void onChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = event.getMessage();
+
+        if(modeCoordinator.isInMode(event.getPlayer().getUniqueId())){
+            chatHandler.sendStaffChatMessage(event.getPlayer().getDisplayName(), event.getMessage());
+            event.setCancelled(true);
+        }
 
         if (shouldCancel(player, message)) {
             event.setCancelled(true);
@@ -85,6 +92,8 @@ public class AsyncPlayerChat implements Listener {
         if (userManager == null)
             return false;
         IUser user = userManager.get(uuid);
+        if(user==null)//FIXME
+            return false;
         IAction queuedAction = user.getQueuedAction();
 
         if (queuedAction != null) {

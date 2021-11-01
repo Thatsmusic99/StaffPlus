@@ -280,8 +280,11 @@ staff-mode:
   # Whether or not a player can fly while in staff mode.
   flight: true
 
-  # Whether or not a player will be put into creative while in staff mode.
+  # Whether or not a player will be put into creative while in staff mode.\
   creative: false
+
+  # Whether or not a play in mode can only speak in staffchat if enabled all chat goes to staffchat
+  force_staffchat: false
 
   # Whether or not to a player to the location they were in before they toggled staff mode.
   original-location: false
@@ -986,7 +989,7 @@ storage:
 
 # The declared version of this configuration file, used for configuration file changes.
 # Do NOT change this unless you know what you're doing (hint: just don't change it).
-config-version: 6205
+config-version: 6206
 # The interval in seconds at which auto saves will be performed.
 # The higher this is, the less lag there will be.
 auto-save: 3602
