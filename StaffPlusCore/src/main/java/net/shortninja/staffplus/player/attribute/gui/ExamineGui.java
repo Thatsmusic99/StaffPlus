@@ -30,8 +30,7 @@ public class ExamineGui extends AbstractGui {
 
     private static final int SIZE = 54;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+
     private UserManager userManager = StaffPlus.get().userManager;
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
     private GadgetHandler gadgetHandler = StaffPlus.get().gadgetHandler;
@@ -41,7 +40,8 @@ public class ExamineGui extends AbstractGui {
         super(SIZE, title);
 
         setInventoryContents(targetPlayer);
-
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (options.modeExamineFood >= 0) {
             setItem(options.modeExamineFood, foodItem(targetPlayer), null);
         }
@@ -86,6 +86,8 @@ public class ExamineGui extends AbstractGui {
     }
 
     private void setInteractiveItems(final Player targetPlayer) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (options.modeExamineLocation >= 0) {
             setItem(options.modeExamineLocation, locationItem(targetPlayer), new IAction() {
                 @Override
@@ -200,6 +202,8 @@ public class ExamineGui extends AbstractGui {
     }
 
     private ItemStack foodItem(Player player) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         int healthLevel = (int) player.getHealth();
         int foodLevel = player.getFoodLevel();
         List<String> lore = new ArrayList<String>();
@@ -218,12 +222,12 @@ public class ExamineGui extends AbstractGui {
     }
 
     private ItemStack ipItem(Player player) {
-        String ip = player.hasPermission(options.ipHidePerm) ? "127.0.0.1" : player.getAddress().getAddress().getHostAddress().replace("/", "");
+        String ip = player.hasPermission(StaffPlus.get().options.ipHidePerm) ? "127.0.0.1" : player.getAddress().getAddress().getHostAddress().replace("/", "");
 
         ItemStack item = Items.builder()
                 .setMaterial(Material.COMPASS).setAmount(1)
                 .setName("&bConnection")
-                .addLore(messages.examineIp.replace("%ipaddress%", ip))
+                .addLore(StaffPlus.get().messages.examineIp.replace("%ipaddress%", ip))
                 .build();
 
         return item;
@@ -233,7 +237,7 @@ public class ExamineGui extends AbstractGui {
         ItemStack item = Items.builder()
                 .setMaterial(Material.PAPER).setAmount(1)
                 .setName("&bPing")
-                .addLore(messages.examineIp.replace("%ping%", String.valueOf(User.getPing(player))))
+                .addLore(StaffPlus.get().messages.examineIp.replace("%ping%", String.valueOf(User.getPing(player))))
                 .build();
 
         return item;
@@ -243,7 +247,7 @@ public class ExamineGui extends AbstractGui {
         ItemStack item = Items.builder()
                 .setMaterial(Material.GRASS).setAmount(1)
                 .setName("&bGamemode")
-                .addLore(messages.examineGamemode.replace("%gamemode%", player.getGameMode().toString()))
+                .addLore(StaffPlus.get().messages.examineGamemode.replace("%gamemode%", player.getGameMode().toString()))
                 .build();
 
         return item;
@@ -254,7 +258,7 @@ public class ExamineGui extends AbstractGui {
         IReport latestReport = user.getReports().size() >= 1 ? user.getReports().get(user.getReports().size() - 1) : null;
         String latestReason = latestReport == null ? "null" : latestReport.getReason();
 
-        for (String string : messages.infractionItem) {
+        for (String string : StaffPlus.get().messages.infractionItem) {
             lore.add(string.replace("%warnings%", Integer.toString(user.getWarnings().size())).replace("%reports%", Integer.toString(user.getReports().size())).replace("%reason%", latestReason));
         }
 
@@ -273,7 +277,7 @@ public class ExamineGui extends AbstractGui {
         ItemStack item = Items.builder()
                 .setMaterial(Material.MAP).setAmount(1)
                 .setName("&bLocation")
-                .addLore(messages.examineLocation.replace("%location%", location.getWorld().getName() + " &8� &7" + JavaUtils.serializeLocation(location)))
+                .addLore(StaffPlus.get().messages.examineLocation.replace("%location%", location.getWorld().getName() + " &8� &7" + JavaUtils.serializeLocation(location)))
                 .build();
 
         return item;
@@ -284,7 +288,7 @@ public class ExamineGui extends AbstractGui {
 
         ItemStack item = Items.builder()
                 .setMaterial(Material.MAP).setAmount(1)
-                .setName(messages.examineNotes)
+                .setName(StaffPlus.get().messages.examineNotes)
                 .setLore(notes)
                 .build();
 
@@ -297,7 +301,7 @@ public class ExamineGui extends AbstractGui {
         ItemStack item = Items.builder()
                 .setMaterial(Material.BLAZE_ROD).setAmount(1)
                 .setName("&bFreeze player")
-                .setLore(Arrays.asList(messages.examineFreeze, "&7Currently " + frozenStatus + "frozen."))
+                .setLore(Arrays.asList(StaffPlus.get().messages.examineFreeze, "&7Currently " + frozenStatus + "frozen."))
                 .build();
 
         return item;
@@ -307,7 +311,7 @@ public class ExamineGui extends AbstractGui {
         ItemStack item = Items.builder()
                 .setMaterial(Material.PAPER).setAmount(1)
                 .setName("&bWarn player")
-                .addLore(messages.examineWarn)
+                .addLore(StaffPlus.get().messages.examineWarn)
                 .build();
 
         return item;

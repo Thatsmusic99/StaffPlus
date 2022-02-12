@@ -378,6 +378,15 @@ public class Options implements IOptions {
         }
 
         loadCustomModules();
+
+    }
+
+    public YamlConfiguration getConfiguration(){
+        return YamlConfiguration.loadConfiguration(new File(StaffPlus.get().getDataFolder(), "config.yml"));
+    }
+
+    public Options reloadConfig(){
+        return new Options();
     }
 
     private void updateConfig() {
@@ -541,6 +550,7 @@ public class Options implements IOptions {
 
         return sound;
     }
+
 
     public ModuleConfiguration.ModuleType stringToModuleType(String string) {
         ModuleConfiguration.ModuleType moduleType = ModuleConfiguration.ModuleType.ITEM;

@@ -21,8 +21,6 @@ import java.util.*;
 
 public class User implements IUser {
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UUID uuid;
     private String name;
     protected short glassColor;
@@ -73,7 +71,7 @@ public class User implements IUser {
 
     public User(UUID uuid, String name) {
         this.uuid = uuid;
-        this.glassColor = options.glassColor;
+        this.glassColor = StaffPlus.get().options.glassColor;
         this.name = name;
 
         for (AlertType alertType : AlertType.values()) {
@@ -202,6 +200,8 @@ public class User implements IUser {
     }
 
     public void addReport(IReport report) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (options.storageType.equalsIgnoreCase("flatfile"))
             reports.add(report);
         else if (options.storageType.equalsIgnoreCase("mysql")) {
@@ -224,6 +224,8 @@ public class User implements IUser {
     }
 
     public void addWarning(IWarning warning) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (options.storageType.equalsIgnoreCase("flatfile"))
             warnings.add(warning);
         else if (options.storageType.equalsIgnoreCase("mysql")) {

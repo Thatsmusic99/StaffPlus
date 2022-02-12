@@ -15,7 +15,6 @@ public class BlacklistFactory {
     private static String[] words = null;
     private static String[] domains = null;
     private static String[] periods = null;
-    private Options options = StaffPlus.get().options;
     private String originalMessage;
     private String censoredMessage;
     private boolean hasChanged = false;
@@ -46,6 +45,7 @@ public class BlacklistFactory {
     }
 
     private String checkIllegalCharacters() {
+        Options options = StaffPlus.get().options;
         String newMessage = originalMessage;
 
         for (String string : options.chatBlacklistCharacters) {
@@ -121,7 +121,7 @@ public class BlacklistFactory {
         StringBuilder builder = new StringBuilder();
 
         for (int k = 0; k < word.length(); k++) {
-            builder.append(options.chatBlacklistCharacter);
+            builder.append(StaffPlus.get().options.chatBlacklistCharacter);
         }
 
         censored = censored.replace(word, builder.toString());
@@ -136,7 +136,7 @@ public class BlacklistFactory {
     private boolean isBypassable(String word) {
         boolean isBypassable = false;
 
-        for (String string : options.chatBlacklistAllowed) {
+        for (String string : StaffPlus.get().options.chatBlacklistAllowed) {
             if (word.contains(string.toLowerCase())) {
                 isBypassable = true;
                 break;
@@ -179,6 +179,7 @@ public class BlacklistFactory {
     }
 
     private void cleanArrays() {
+        Options options = StaffPlus.get().options;
         //Collections.sort(options.chatBlacklistWords);
         //Collections.sort(options.chatBlacklistDomains);
         //Collections.sort(options.chatBlacklistPeriods);

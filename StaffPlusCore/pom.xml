@@ -5,7 +5,7 @@
     <parent>
         <artifactId>StaffPlus</artifactId>
         <groupId>net.shortninja.staffplus</groupId>
-        <version>3.3.6.0-RELEASE</version>
+        <version>3.3.8.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -61,6 +61,12 @@
                                     </excludes>
                                 </filter>
                             </filters>
+                            <relocations>
+                                <relocation>
+                                   <pattern>com.zaxxer.hikari</pattern>
+                                    <shadedPattern>net.shortninja.hikari</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
@@ -80,7 +86,7 @@
         <dependency>
             <groupId>net.shortninja.staffplus</groupId>
             <artifactId>StaffPlusAPI</artifactId>
-            <version>3.3.6.0-RELEASE</version>
+            <version>3.3.8.1</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>

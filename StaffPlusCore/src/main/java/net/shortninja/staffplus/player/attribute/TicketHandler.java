@@ -20,8 +20,7 @@ public class TicketHandler {
     private static Map<UUID, Ticket> tickets = new HashMap<UUID, Ticket>();
     private static int nextTicketId = 1;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+
 
     public Collection<Ticket> getTickets() {
         return tickets.values();
@@ -53,6 +52,8 @@ public class TicketHandler {
     }
 
     public void addTicket(Player player, Ticket ticket) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         String message = messages.ticket.replace("%ticket%", Integer.toString(ticket.getId())).replace("%player%", ticket.getName()).replace("%message%", ticket.getInquiry());
 
         this.message.send(player, message, messages.prefixTickets);
@@ -79,7 +80,8 @@ public class TicketHandler {
         if (ticket == null) {
             return;
         }
-
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         String message = messages.ticketRemoved.replace("%ticket%", Integer.toString(ticket.getId())).replace("%reason%", ticketCloseReason == TicketCloseReason.STAFF ? reason : ticketCloseReason.getMessage());
 
         this.message.sendGroupMessage(message, options.permissionTickets, messages.prefixTickets);
@@ -101,6 +103,8 @@ public class TicketHandler {
     }
 
     public void sendResponse(CommandSender sender, Ticket ticket, String response, boolean isStaffResponse) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         String message = isStaffResponse ? messages.ticketResponseStaff.replace("%ticket%", Integer.toString(ticket.getId())).replace("%player%", sender.getName()).replace("%message%", response) : messages.ticket.replace("%ticket%", Integer.toString(ticket.getId())).replace("%player%", sender.getName()).replace("%message%", response);
 
         this.message.send(sender, message, messages.prefixTickets);

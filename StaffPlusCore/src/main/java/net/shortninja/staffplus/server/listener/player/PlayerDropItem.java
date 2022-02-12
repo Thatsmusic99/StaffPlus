@@ -13,7 +13,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import java.util.UUID;
 
 public class PlayerDropItem implements Listener {
-    private Options options = StaffPlus.get().options;
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
@@ -25,7 +24,7 @@ public class PlayerDropItem implements Listener {
     public void onDrop(PlayerDropItemEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
 
-        if ((options.modeItemChange || !modeCoordinator.isInMode(uuid)) && !freezeHandler.isFrozen(uuid)) {
+        if ((StaffPlus.get().options.modeItemChange || !modeCoordinator.isInMode(uuid)) && !freezeHandler.isFrozen(uuid)) {
             return;
         }
 

@@ -15,8 +15,6 @@ import java.util.UUID;
 public class CpsHandler {
     private static Map<UUID, Integer> currentTests = new HashMap<UUID, Integer>();
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
 
     public boolean isTesting(UUID uuid) {
         return currentTests.containsKey(uuid);
@@ -29,6 +27,8 @@ public class CpsHandler {
     }
 
     public void startTest(final CommandSender sender, final Player targetPlayer) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if(currentTests.containsKey(targetPlayer.getUniqueId()))
             return;
         currentTests.put(targetPlayer.getUniqueId(), 0);
@@ -43,6 +43,8 @@ public class CpsHandler {
     }
 
     public void stopTest(CommandSender sender, Player targetPlayer) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         UUID uuid = targetPlayer.getUniqueId();
         if (uuid == null)
             return;

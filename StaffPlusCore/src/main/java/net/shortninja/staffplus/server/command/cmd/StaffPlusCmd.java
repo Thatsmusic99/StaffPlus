@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class StaffPlusCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
@@ -31,13 +32,12 @@ public class StaffPlusCmd extends BukkitCommand {
         if (sender instanceof Player) {
             if (args.length == 1 && permission.has(sender, options.permissionStaff)) {
                 if (args[0].equalsIgnoreCase("reload")) {
-                    Bukkit.getPluginManager().getPlugin("StaffPlus").reloadConfig();
                     StaffPlus.get().reloadFiles();
-                    StaffPlus.get().message.sendConsoleMessage("Plugin config and lang file reloaded", false);
                     StaffPlus.get().message.send((Player) sender, "Config and lang file have been reloaded", "StaffPlus");
+                    Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("StaffPlus")).reloadConfig();
                 }
             }
-        } else {
+        } else {//Console
             if (args.length == 1 && permission.has(sender, options.permissionStaff)) {
                 if (args[0].equalsIgnoreCase("reload")) {
                     Bukkit.getPluginManager().getPlugin("StaffPlus").reloadConfig();

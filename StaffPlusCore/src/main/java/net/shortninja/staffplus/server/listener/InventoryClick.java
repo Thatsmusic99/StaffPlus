@@ -17,7 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.UUID;
 
 public class InventoryClick implements Listener {
-    private Options options = StaffPlus.get().options;
     private UserManager userManager = StaffPlus.get().userManager;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
@@ -42,7 +41,7 @@ public class InventoryClick implements Listener {
         if (user == null)
             return;
         if (!user.getCurrentGui().isPresent() || item == null) {
-            if (modeCoordinator.isInMode(uuid) && !options.modeInventoryInteraction) {
+            if (modeCoordinator.isInMode(uuid) && !StaffPlus.get().options.modeInventoryInteraction) {
                 event.setCancelled(true);
             }
 

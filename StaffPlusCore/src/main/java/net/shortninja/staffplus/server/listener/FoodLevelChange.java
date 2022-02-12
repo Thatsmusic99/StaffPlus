@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 public class FoodLevelChange implements Listener {
-    private Options options = StaffPlus.get().options;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
     public FoodLevelChange() {
@@ -27,7 +26,7 @@ public class FoodLevelChange implements Listener {
             return;
         }
 
-        if (options.modeHungerLoss || !modeCoordinator.isInMode(((Player) entity).getUniqueId())) {
+        if (StaffPlus.get().options.modeHungerLoss || !modeCoordinator.isInMode(((Player) entity).getUniqueId())) {
             return;
         }
 

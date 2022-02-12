@@ -22,8 +22,6 @@ public class FreezeHandler {
     private static Set<UUID> loggedOut = new HashSet<UUID>();
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public boolean isFrozen(UUID uuid) {
@@ -38,6 +36,8 @@ public class FreezeHandler {
     }
 
     public void addFreeze(CommandSender sender, Player player, boolean shouldMessage) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         UUID uuid = player.getUniqueId();
 
         if (permission.has(player, options.permissionFreezeBypass) && shouldMessage) {
@@ -62,6 +62,8 @@ public class FreezeHandler {
     }
 
     public void removeFreeze(CommandSender sender, Player player, boolean shouldMessage) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         UUID uuid = player.getUniqueId();
         IUser user = userManager.get(uuid);
 

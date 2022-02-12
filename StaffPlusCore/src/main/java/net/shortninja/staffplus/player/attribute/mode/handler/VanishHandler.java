@@ -21,8 +21,7 @@ public class VanishHandler {
     private IProtocol versionProtocol = StaffPlus.get().versionProtocol;
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+
     private UserManager userManager = StaffPlus.get().userManager;
     private StaffPlus staffPlus = StaffPlus.get();
 
@@ -74,6 +73,8 @@ public class VanishHandler {
     }
 
     private void applyVanish(Player player, VanishType vanishType, boolean shouldMessage) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         String message = "";
 
         switch (vanishType) {
@@ -110,7 +111,7 @@ public class VanishHandler {
     }
 
     private void unapplyVanish(Player player, VanishType vanishType, boolean shouldMessage) {
-
+        Messages messages = StaffPlus.get().messages;
         String message = "";
 
         switch (vanishType) {

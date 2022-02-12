@@ -17,7 +17,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class InventoryClose implements Listener {
-    private Options options = StaffPlus.get().options;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public InventoryClose() {
@@ -30,11 +29,11 @@ public class InventoryClose implements Listener {
         IUser user = userManager.get(player.getUniqueId());
         if (user == null)
             return;
-        if (user.isFrozen() && options.modeFreezePrompt) {
+        if (user.isFrozen() && StaffPlus.get().options.modeFreezePrompt) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    new FreezeGui(player, options.modeFreezePromptTitle);
+                    new FreezeGui(player, StaffPlus.get().options.modeFreezePromptTitle);
                 }
             }.runTaskLater(StaffPlus.get(), 1L);
             return;

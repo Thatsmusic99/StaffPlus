@@ -15,8 +15,6 @@ import org.bukkit.entity.Player;
 public class ReviveCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private ReviveHandler reviveHandler = StaffPlus.get().reviveHandler;
 
     public ReviveCmd(String name) {
@@ -25,6 +23,8 @@ public class ReviveCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         Player targetPlayer = null;
 
         if (!permission.has(sender, options.permissionRevive)) {

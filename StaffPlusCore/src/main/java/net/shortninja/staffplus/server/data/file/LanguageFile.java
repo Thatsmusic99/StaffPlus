@@ -2,6 +2,7 @@ package net.shortninja.staffplus.server.data.file;
 
 import net.shortninja.staffplus.StaffPlus;
 import net.shortninja.staffplus.util.MessageCoordinator;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -34,6 +35,7 @@ public class LanguageFile {
     public void setup() {
         langFile = new File(StaffPlus.get().getDataFolder() + "/lang/", FILE_NAME);
         lang = YamlConfiguration.loadConfiguration(langFile);
+
     }
 
     public FileConfiguration get() {
@@ -76,5 +78,9 @@ public class LanguageFile {
 
         out.close();
         in.close();
+    }
+
+    public File getLangFile() {
+        return langFile;
     }
 }

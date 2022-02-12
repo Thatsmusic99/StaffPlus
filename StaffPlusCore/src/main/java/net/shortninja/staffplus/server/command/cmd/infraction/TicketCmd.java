@@ -18,8 +18,6 @@ import java.util.Collection;
 public class TicketCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private TicketHandler ticketHandler = StaffPlus.get().ticketHandler;
 
     public TicketCmd(String name) {
@@ -28,6 +26,8 @@ public class TicketCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         boolean hasPermission = permission.has(sender, options.permissionTickets);
 
         if (args.length >= 3 && hasPermission) {
@@ -60,6 +60,7 @@ public class TicketCmd extends BukkitCommand {
     }
 
     private boolean manageTicket(CommandSender sender, String[] args) {
+        Messages messages = StaffPlus.get().messages;
         boolean hasBeenManaged = false;
         String argument = args[0];
         Ticket ticket = getTicket(args[1]);
@@ -103,6 +104,7 @@ public class TicketCmd extends BukkitCommand {
     }
 
     private void listTickets(CommandSender sender) {
+        Messages messages = StaffPlus.get().messages;
         Collection<Ticket> tickets = ticketHandler.getOpenTickets();
 
         for (String message : messages.ticketListStart) {
@@ -119,6 +121,7 @@ public class TicketCmd extends BukkitCommand {
     }
 
     private void sendHelp(CommandSender sender) {
+        Messages messages = StaffPlus.get().messages;
         message.send(sender, "&7" + message.LONG_LINE, "");
         message.send(sender, "&b/" + getName() + " &7" + getUsage(), messages.prefixReports);
         message.send(sender, "&b/" + getName() + " list", messages.prefixReports);

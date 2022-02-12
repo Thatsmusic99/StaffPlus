@@ -20,8 +20,7 @@ import java.util.List;
 public class ReportsGui extends AbstractGui {
     private static final int SIZE = 54;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+
     private UserManager userManager = StaffPlus.get().userManager;
     private InfractionCoordinator infractionCoordinator = StaffPlus.get().infractionCoordinator;
 
@@ -36,7 +35,7 @@ public class ReportsGui extends AbstractGui {
                 if (p != null) {
                     infractionCoordinator.removeUnresolvedReport(p.getUniqueId());
                     player.teleport(p);
-                } else message.send(player, messages.playerOffline, messages.prefixGeneral);
+                } else message.send(player, StaffPlus.get().messages.playerOffline, StaffPlus.get().messages.prefixGeneral);
             }
 
             @Override
@@ -65,11 +64,12 @@ public class ReportsGui extends AbstractGui {
     }
 
     private ItemStack reportItem(Report report) {
+
         List<String> lore = new ArrayList<String>();
 
         lore.add("&bReason: " + report.getReason());
 
-        if (options.reportsShowReporter) {
+        if (StaffPlus.get().options.reportsShowReporter) {
             lore.add("&bReporter: " + report.getReporterName());
         }
 

@@ -7,7 +7,7 @@ import net.shortninja.staffplus.unordered.IWarning;
 import java.util.UUID;
 
 public class Warning implements IWarning {
-    private Options options = StaffPlus.get().options;
+    //private Options options = StaffPlus.get().options;
     private UUID uuid;
     private String name;
     private String reason;
@@ -74,7 +74,7 @@ public class Warning implements IWarning {
     public boolean shouldRemove() {
         boolean shouldRemove = false;
 
-        if ((System.currentTimeMillis() - time) >= options.warningsClear) {
+        if ((System.currentTimeMillis() - time) >= StaffPlus.get().options.warningsClear) {
             shouldRemove = true;
         }
 

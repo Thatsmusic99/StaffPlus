@@ -27,8 +27,6 @@ import java.util.UUID;
 public class PlayerCommandPreprocess implements Listener {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
     private CmdHandler cmdHandler = StaffPlus.get().cmdHandler;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
@@ -39,6 +37,8 @@ public class PlayerCommandPreprocess implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCommand(PlayerCommandPreprocessEvent event) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
         String command = event.getMessage().toLowerCase();
@@ -86,7 +86,7 @@ public class PlayerCommandPreprocess implements Listener {
         }
 
         if (count == 0) {
-            message.send(player, messages.noPermission, messages.prefixGeneral);
+            message.send(player, StaffPlus.get().messages.noPermission, StaffPlus.get().messages.prefixGeneral);
         }
 
         message.send(player, "&7" + message.LONG_LINE, "");

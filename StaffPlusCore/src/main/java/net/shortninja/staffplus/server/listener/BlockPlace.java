@@ -13,7 +13,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import java.util.UUID;
 
 public class BlockPlace implements Listener {
-    private Options options = StaffPlus.get().options;
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
@@ -25,7 +24,7 @@ public class BlockPlace implements Listener {
     public void onPlace(BlockPlaceEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
 
-        if ((options.modeBlockManipulation || !modeCoordinator.isInMode(uuid)) && !freezeHandler.isFrozen(uuid)) {
+        if ((StaffPlus.get().options.modeBlockManipulation || !modeCoordinator.isInMode(uuid)) && !freezeHandler.isFrozen(uuid)) {
             return;
         }
 

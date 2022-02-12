@@ -24,8 +24,6 @@ public class ReportCmd extends BukkitCommand {
     private static Map<UUID, Long> lastUse = new HashMap<UUID, Long>();
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public ReportCmd(String name) {
@@ -34,6 +32,8 @@ public class ReportCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (args.length >= 2) {
             String argument = args[0];
             String option = args[1];
@@ -71,6 +71,7 @@ public class ReportCmd extends BukkitCommand {
     }
 
     private void listReports(CommandSender sender, Player player) {
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(player.getUniqueId());
 
         if (user != null) {
@@ -93,6 +94,7 @@ public class ReportCmd extends BukkitCommand {
     }
 
     private void clearReports(CommandSender sender, Player player) {
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(player.getUniqueId());
 
         if (user != null) {
@@ -102,6 +104,7 @@ public class ReportCmd extends BukkitCommand {
     }
 
     private void sendReport(CommandSender sender, String option, String reason) {
+        Messages messages = StaffPlus.get().messages;
         String reporterName = "Console"; // The name "Console" is taken, but it is capitalized as "CONSOLE".
         UUID reporterUuid = null;
         Player reported = Bukkit.getPlayer(option);
@@ -123,6 +126,7 @@ public class ReportCmd extends BukkitCommand {
     }
 
     private void sendHelp(CommandSender sender) {
+        Messages messages = StaffPlus.get().messages;
         message.send(sender, "&7" + message.LONG_LINE, "");
         message.send(sender, "&b/" + getName() + " &7" + getUsage(), messages.prefixReports);
         message.send(sender, "&b/" + getName() + " get &7[player]", messages.prefixReports);

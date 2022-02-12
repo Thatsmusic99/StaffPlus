@@ -27,8 +27,6 @@ public class AsyncPlayerChat implements Listener {
     private IProtocol versionProtocol = StaffPlus.get().versionProtocol;
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().getUserManager();
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
     private ChatHandler chatHandler = StaffPlus.get().chatHandler;
@@ -41,6 +39,8 @@ public class AsyncPlayerChat implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onChat(AsyncPlayerChatEvent event) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         Player player = event.getPlayer();
         String message = event.getMessage();
 
@@ -86,6 +86,8 @@ public class AsyncPlayerChat implements Listener {
     }
 
     private boolean shouldCancel(Player player, String message) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         boolean shouldCancel = false;
         UUID uuid = player.getUniqueId();
 

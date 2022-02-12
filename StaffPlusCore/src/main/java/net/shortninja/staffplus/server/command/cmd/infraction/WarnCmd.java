@@ -21,8 +21,6 @@ import java.util.UUID;
 public class WarnCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public WarnCmd(String name) {
@@ -31,6 +29,8 @@ public class WarnCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (!permission.has(sender, options.permissionWarn)) {
             message.send(sender, messages.noPermission, messages.prefixWarnings);
             return true;
@@ -60,6 +60,7 @@ public class WarnCmd extends BukkitCommand {
     }
 
     private void listWarnings(CommandSender sender, Player player) {
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(player.getUniqueId());
 
         if (user != null) {
@@ -82,6 +83,7 @@ public class WarnCmd extends BukkitCommand {
     }
 
     private void clearWarnings(CommandSender sender, Player player) {
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(player.getUniqueId());
 
         if (user != null) {
@@ -91,6 +93,7 @@ public class WarnCmd extends BukkitCommand {
     }
 
     private void sendWarning(CommandSender sender, String option, String reason) {
+        Messages messages = StaffPlus.get().messages;
         String issuerName = "Console"; // The name "Console" is taken, but it is capitalized as "CONSOLE".
         UUID issuerUuid = null;
         Player warned = Bukkit.getPlayer(option);
@@ -110,6 +113,7 @@ public class WarnCmd extends BukkitCommand {
     }
 
     private void sendHelp(CommandSender sender) {
+        Messages messages = StaffPlus.get().messages;
         message.send(sender, "&7" + message.LONG_LINE, "");
         message.send(sender, "&b/" + getName() + " &7[player] [reason]", messages.prefixReports);
         message.send(sender, "&b/" + getName() + " get &7[player]", messages.prefixReports);

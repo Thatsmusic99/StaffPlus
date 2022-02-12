@@ -17,8 +17,6 @@ import org.bukkit.entity.Player;
 public class AlertsCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public AlertsCmd(String name) {
@@ -27,6 +25,7 @@ public class AlertsCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Messages messages = StaffPlus.get().messages;
         if (args.length >= 3 && permission.isOp(sender)) {
             Player targetPlayer = Bukkit.getPlayer(args[1]);
             String option = args[2];
@@ -50,6 +49,8 @@ public class AlertsCmd extends BukkitCommand {
     }
 
     private void handleAlertsArgument(CommandSender sender, String argument, Player player, boolean shouldCheckPermission, String option) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (argument.equals("namechange")) {
             argument = "name_change";
         }
@@ -99,7 +100,7 @@ public class AlertsCmd extends BukkitCommand {
 
     private void sendHelp(CommandSender sender) {
         message.send(sender, "&7" + message.LONG_LINE, "");
-        message.send(sender, "&b/" + getName() + " &7" + getUsage(), messages.prefixGeneral);
+        message.send(sender, "&b/" + getName() + " &7" + getUsage(), StaffPlus.get().messages.prefixGeneral);
         message.send(sender, "&7" + message.LONG_LINE, "");
     }
 }

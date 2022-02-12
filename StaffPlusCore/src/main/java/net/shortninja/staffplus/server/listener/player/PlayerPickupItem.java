@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class PlayerPickupItem implements Listener {
-    private Options options = StaffPlus.get().options;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
     public PlayerPickupItem() {
@@ -22,7 +21,7 @@ public class PlayerPickupItem implements Listener {
     public void onPickup(PlayerPickupItemEvent event) {
         Player player = event.getPlayer();
 
-        if (options.modeItemChange || !modeCoordinator.isInMode(player.getUniqueId())) {
+        if (StaffPlus.get().options.modeItemChange || !modeCoordinator.isInMode(player.getUniqueId())) {
             return;
         }
 

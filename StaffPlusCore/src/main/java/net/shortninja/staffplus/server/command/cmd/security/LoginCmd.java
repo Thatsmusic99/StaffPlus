@@ -18,8 +18,7 @@ import java.util.UUID;
 public class LoginCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+
     private SecurityHandler securityHandler = StaffPlus.get().securityHandler;
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
 
@@ -29,6 +28,8 @@ public class LoginCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (!permission.has(sender, options.permissionMember)) {
             message.send(sender, messages.noPermission, messages.prefixGeneral);
             return true;

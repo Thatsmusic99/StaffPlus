@@ -14,8 +14,6 @@ import org.bukkit.entity.Player;
 public class ChatCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private ChatHandler chatHandler = StaffPlus.get().chatHandler;
 
     public ChatCmd(String name) {
@@ -34,6 +32,8 @@ public class ChatCmd extends BukkitCommand {
     }
 
     private void handleChatArgument(CommandSender sender, String argument, String option, boolean shouldCheckPermission) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         String name = sender instanceof Player ? sender.getName() : "Console";
 
         switch (argument.toLowerCase()) {
@@ -63,7 +63,7 @@ public class ChatCmd extends BukkitCommand {
 
     private void sendHelp(CommandSender sender) {
         message.send(sender, "&7" + message.LONG_LINE, "");
-        message.send(sender, "&b/" + getName() + " &7" + getUsage(), messages.prefixGeneral);
+        message.send(sender, "&b/" + getName() + " &7" + getUsage(), StaffPlus.get().messages.prefixGeneral);
         message.send(sender, "&7" + message.LONG_LINE, "");
     }
 }

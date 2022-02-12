@@ -27,6 +27,7 @@ import net.shortninja.staffplus.server.data.file.ChangelogFile;
 import net.shortninja.staffplus.server.data.file.DataFile;
 import net.shortninja.staffplus.server.data.file.LanguageFile;
 import net.shortninja.staffplus.server.hook.HookHandler;
+import net.shortninja.staffplus.server.hook.PAPIExpansion;
 import net.shortninja.staffplus.server.hook.SuperVanishHook;
 import net.shortninja.staffplus.server.listener.*;
 import net.shortninja.staffplus.server.listener.entity.EntityChangeBlock;
@@ -42,6 +43,7 @@ import net.shortninja.staffplus.util.PermissionHandler;
 import net.shortninja.staffplus.util.lib.JavaUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
@@ -104,18 +106,18 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
     public void onLoad() {
 
         Bukkit.getLogger().setFilter(new PasswordFilter()); // FIXME
-
-
+        plugin = this;
         Plugin placeholderPlugin;
         if ((placeholderPlugin = Bukkit.getPluginManager().getPlugin("PlaceholderAPI")) != null) {
             usesPlaceholderAPI = true;
+            new PAPIExpansion().register();
             Bukkit.getLogger().info("Hooked into PlaceholderAPI " + placeholderPlugin.getDescription().getVersion());
         }
     }
 
     @Override
     public void onEnable() {
-        plugin = this;
+
         saveDefaultConfig();
         permission = new PermissionHandler(this);
         message = new MessageCoordinator(this);
@@ -181,7 +183,7 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
         languageFile = new LanguageFile();
         messages = new Messages();
         userManager = new UserManager(this);
-        //securityHandler = new SecurityHandler(); // FIXME
+        securityHandler = new SecurityHandler(); // FIXME
         hookHandler = new HookHandler();
         cpsHandler = new CpsHandler();
         freezeHandler = new FreezeHandler();
@@ -321,9 +323,22 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
     }
 
     public void reloadFiles() {
-        options = new Options();
+        /*options = options.reloadConfig();
         languageFile = new LanguageFile();
         messages = new Messages();
+        YamlConfiguration langConfig = YamlConfiguration.loadConfiguration(languageFile.getLangFile());
+        for(String s : langConfig.getConfigurationSection("").getKeys(false)){
+            System.out.println(langConfig.get(s));
+        }*/
+        YamlConfiguration configuration = new Options().getConfiguration();
+        LanguageFile languageFile = new LanguageFile();
+        YamlConfiguration languageConfig = (YamlConfiguration) languageFile.get();
+        languageConfig.getConfigurationSection("").getKeys(false).forEach( s -> {
+            getLogger().info(languageConfig.get(s).toString());
+        });
+        this.languageFile = languageFile;
+        this.messages = new Messages();
+
     }
 
     public PermissionHandler getPermissions() {

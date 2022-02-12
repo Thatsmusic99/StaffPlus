@@ -15,8 +15,6 @@ import org.bukkit.entity.Player;
 public class EChestView extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
 
     public EChestView(String name) {
         super(name);
@@ -24,6 +22,8 @@ public class EChestView extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (!(sender instanceof Player)) {
             sender.sendMessage("Command can only be used by players");
             return true;

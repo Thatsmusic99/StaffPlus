@@ -23,8 +23,8 @@ public class CounterGui extends AbstractGui {
     private static final int SIZE = 54;
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+    //private Options options = StaffPlus.get().options;
+    //private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
@@ -38,7 +38,7 @@ public class CounterGui extends AbstractGui {
 
                 if (p != null) {
                     player.teleport(p);
-                } else message.send(player, messages.playerOffline, messages.prefixGeneral);
+                } else message.send(player, StaffPlus.get().messages.playerOffline, StaffPlus.get().messages.prefixGeneral);
             }
 
             @Override
@@ -51,11 +51,11 @@ public class CounterGui extends AbstractGui {
             }
         };
 
-        List<Player> players = options.modeCounterShowStaffMode ? getModePlayers() : JavaUtils.getOnlinePlayers();
+        List<Player> players = StaffPlus.get().options.modeCounterShowStaffMode ? getModePlayers() : JavaUtils.getOnlinePlayers();
         int slot = 0; // Better to use this because not every iteration is going to have a result.
 
         for (Player p : players) {
-            if (!permission.has(p, options.permissionMember)) {
+            if (!permission.has(p, StaffPlus.get().options.permissionMember)) {
                 continue;
             } else if ((slot + 1) >= SIZE) {
                 break;

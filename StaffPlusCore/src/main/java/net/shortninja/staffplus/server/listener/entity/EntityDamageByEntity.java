@@ -13,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class EntityDamageByEntity implements Listener {
-    private Options options = StaffPlus.get().options;
     private UserManager userManager = StaffPlus.get().userManager;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
@@ -23,6 +22,7 @@ public class EntityDamageByEntity implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDamage(EntityDamageByEntityEvent event) {
+        Options options = StaffPlus.get().options;
         Player player = null;
 
         if (!(event.getDamager() instanceof Player)) {

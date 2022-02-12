@@ -29,8 +29,6 @@ import net.shortninja.staffplus.player.attribute.SecurityHandler;
 public class PlayerJoin implements Listener {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().getUserManager();
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
@@ -46,6 +44,7 @@ public class PlayerJoin implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onJoin(PlayerJoinEvent event) {
+        Options options = StaffPlus.get().options;
 
         Player player = event.getPlayer();
 

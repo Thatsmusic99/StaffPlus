@@ -19,8 +19,6 @@ public class InfractionCoordinator {
     private static Map<UUID, Report> unresolvedReports = new HashMap<UUID, Report>();
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public Collection<Report> getUnresolvedReports() {
@@ -51,6 +49,8 @@ public class InfractionCoordinator {
     }
 
     public void sendReport(CommandSender sender, Report report) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(report.getUuid());
 
         if (user == null || !user.getPlayer().isPresent()) {
@@ -79,6 +79,8 @@ public class InfractionCoordinator {
     }
 
     public void sendWarning(CommandSender sender, IWarning warning) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(warning.getUuid());
         Optional<Player> p = user.getPlayer();
 

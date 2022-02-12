@@ -19,8 +19,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerQuit implements Listener {
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().getUserManager();
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
     private VanishHandler vanishHandler = StaffPlus.get().vanishHandler;
@@ -32,6 +30,8 @@ public class PlayerQuit implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onQuit(PlayerQuitEvent event) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
 
         Player player = event.getPlayer();
         manageUser(player);
@@ -51,7 +51,8 @@ public class PlayerQuit implements Listener {
 
     private void manageUser(Player player) {
         IUser user = userManager.get(player.getUniqueId());
-
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         user.setOnline(false);
 
         if (user.isFrozen()) {

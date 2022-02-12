@@ -14,7 +14,6 @@ import java.util.List;
 
 public class FreezeGui extends AbstractGui {
     private static final int SIZE = 9;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public FreezeGui(Player player, String title) {
@@ -26,7 +25,7 @@ public class FreezeGui extends AbstractGui {
     }
 
     private ItemStack freezeItem() {
-        List<String> freezeMessage = new ArrayList<String>(messages.freeze);
+        List<String> freezeMessage = new ArrayList<String>(StaffPlus.get().messages.freeze);
         String name = getTitle();
         List<String> lore = Arrays.asList("&7You are currently frozen!");
 

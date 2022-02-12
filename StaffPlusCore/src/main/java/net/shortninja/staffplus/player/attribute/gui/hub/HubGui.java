@@ -3,6 +3,7 @@ package net.shortninja.staffplus.player.attribute.gui.hub;
 import net.shortninja.staffplus.StaffPlus;
 import net.shortninja.staffplus.player.UserManager;
 import net.shortninja.staffplus.player.attribute.gui.AbstractGui;
+import net.shortninja.staffplus.server.data.config.Messages;
 import net.shortninja.staffplus.server.data.config.Options;
 import net.shortninja.staffplus.unordered.IAction;
 import net.shortninja.staffplus.unordered.IUser;
@@ -13,14 +14,16 @@ import org.bukkit.inventory.ItemStack;
 
 public class HubGui extends AbstractGui {
     private static final int SIZE = 27;
-    private Options options = StaffPlus.get().options;
+    //private Options options = StaffPlus.get().options;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public HubGui(Player player, String title) {
+
         super(SIZE, title);
 
         IUser user = userManager.get(player.getUniqueId());
 
+        Options options = StaffPlus.get().options;
         if (options.modeGuiReports) {
             setItem(options.modeGuiMiner ? 12 : 13, reportsItem(), new IAction() {
                 @Override
@@ -63,6 +66,7 @@ public class HubGui extends AbstractGui {
     }
 
     private ItemStack reportsItem() {
+        Options options = StaffPlus.get().options;
         ItemStack item = Items.builder()
                 .setMaterial(Material.PAPER).setAmount(1)
                 .setName(options.modeGuiReportsName)
@@ -73,6 +77,7 @@ public class HubGui extends AbstractGui {
     }
 
     private ItemStack minerItem() {
+        Options options = StaffPlus.get().options;
         ItemStack item = Items.builder()
                 .setMaterial(Material.STONE_PICKAXE).setAmount(1)
                 .setName(options.modeGuiMinerName)

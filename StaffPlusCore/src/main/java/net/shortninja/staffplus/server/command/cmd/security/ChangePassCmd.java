@@ -17,8 +17,6 @@ public class ChangePassCmd extends BukkitCommand {
 
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private SecurityHandler securityHandler = StaffPlus.get().securityHandler;
 
     public ChangePassCmd(String name){
@@ -27,6 +25,8 @@ public class ChangePassCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String s, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
 
         if (sender instanceof Player) {
             Player p = (Player) sender;

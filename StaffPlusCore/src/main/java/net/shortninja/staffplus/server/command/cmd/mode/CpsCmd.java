@@ -15,8 +15,6 @@ import org.bukkit.entity.Player;
 public class CpsCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private GadgetHandler gadgetHandler = StaffPlus.get().gadgetHandler;
 
     public CpsCmd(String name) {
@@ -25,6 +23,8 @@ public class CpsCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         Player targetPlayer = null;
 
         if (!permission.has(sender, options.permissionCps)) {

@@ -10,7 +10,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 
 public class PlayerWorldChange implements Listener {
-    private Options options = StaffPlus.get().options;
     private ModeCoordinator modeCoordinator = StaffPlus.get().modeCoordinator;
 
     public PlayerWorldChange() {
@@ -20,7 +19,7 @@ public class PlayerWorldChange implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onWorldChange(PlayerChangedWorldEvent event) {
-        if (modeCoordinator.isInMode(event.getPlayer().getUniqueId()) && options.worldChange) {
+        if (modeCoordinator.isInMode(event.getPlayer().getUniqueId()) && StaffPlus.get().options.worldChange) {
             modeCoordinator.removeMode(event.getPlayer());
         }
     }

@@ -26,8 +26,6 @@ public class GadgetHandler {
     private IProtocol versionProtocol = StaffPlus.get().versionProtocol;
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
     private CpsHandler cpsHandler = StaffPlus.get().cpsHandler;
     private FreezeHandler freezeHandler = StaffPlus.get().freezeHandler;
@@ -73,17 +71,19 @@ public class GadgetHandler {
     }
 
     public ModuleConfiguration getModule(ItemStack item) {
-        return options.moduleConfigurations.get(versionProtocol.getNbtString(item));
+        return StaffPlus.get().options.moduleConfigurations.get(versionProtocol.getNbtString(item));
     }
 
     public void onCompass(Player player) {
         Vector vector = player.getLocation().getDirection();
 
 
-        player.setVelocity(JavaUtils.makeVelocitySafe(vector.multiply(options.modeCompassVelocity)));
+        player.setVelocity(JavaUtils.makeVelocitySafe(vector.multiply(StaffPlus.get().options.modeCompassVelocity)));
     }
 
     public void onRandomTeleport(Player player, int count) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         List<Player> onlinePlayers = JavaUtils.getOnlinePlayers();
         Player currentPlayer = null;
 
@@ -126,6 +126,8 @@ public class GadgetHandler {
     }
 
     public void onVanish(Player player, boolean shouldUpdateItem) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         ModeItem modeItem = StaffPlus.get().modeCoordinator.MODE_ITEMS[2];
         ItemStack item = player.getItemInHand();
         int slot = JavaUtils.getItemSlot(player.getInventory(), item);
@@ -148,11 +150,11 @@ public class GadgetHandler {
     }
 
     public void onGuiHub(Player player) {
-        new HubGui(player, options.modeGuiItem.getItemMeta().getDisplayName());
+        new HubGui(player, StaffPlus.get().options.modeGuiItem.getItemMeta().getDisplayName());
     }
 
     public void onCounter(Player player) {
-        new CounterGui(player, options.modeCounterTitle);
+        new CounterGui(player, StaffPlus.get().options.modeCounterTitle);
     }
 
     public void onFreeze(CommandSender sender, Player targetPlayer) {
@@ -178,7 +180,7 @@ public class GadgetHandler {
             return;
         }
 
-        new ExamineGui(player, targetPlayer, options.modeExamineTitle);
+        new ExamineGui(player, targetPlayer, StaffPlus.get().options.modeExamineTitle);
     }
 
     public void onFollow(Player player, Player targetPlayer) {
@@ -231,7 +233,7 @@ public class GadgetHandler {
                 }
 
                 if (getGadgetType(item, versionProtocol.getNbtString(item)) == GadgetType.COUNTER) {
-                    item.setAmount(options.modeCounterShowStaffMode ? modeUsers.size() : permission.getStaffCount());
+                    item.setAmount(StaffPlus.get().options.modeCounterShowStaffMode ? modeUsers.size() : permission.getStaffCount());
                     break;
                 }
             }

@@ -20,7 +20,6 @@ import java.util.Map;
 
 public class AbstractGui implements IGui {
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
     private String title;
     private Inventory inventory;
     private Map<Integer, IAction> actions = new HashMap<>();
@@ -56,7 +55,7 @@ public class AbstractGui implements IGui {
         IAction action = new IAction() {
             @Override
             public void click(Player player, ItemStack item, int slot) {
-                new ColorGui(player, options.glassTitle);
+                new ColorGui(player, StaffPlus.get().options.glassTitle);
             }
 
             @Override

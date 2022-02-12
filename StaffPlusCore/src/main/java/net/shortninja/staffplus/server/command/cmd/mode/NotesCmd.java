@@ -18,8 +18,6 @@ import java.util.List;
 public class NotesCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public NotesCmd(String name) {
@@ -28,6 +26,8 @@ public class NotesCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Options options = StaffPlus.get().options;
+        Messages messages = StaffPlus.get().messages;
         if (!permission.has(sender, options.permissionExamine)) {
             message.send(sender, messages.noPermission, messages.prefixGeneral);
             return true;
@@ -56,6 +56,7 @@ public class NotesCmd extends BukkitCommand {
     }
 
     private void listNotes(CommandSender sender, Player player) {
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(player.getUniqueId());
 
         if (user != null) {
@@ -78,6 +79,7 @@ public class NotesCmd extends BukkitCommand {
     }
 
     private void clearNotes(CommandSender sender, Player player) {
+        Messages messages = StaffPlus.get().messages;
         IUser user = userManager.get(player.getUniqueId());
 
         if (user != null) {
@@ -87,6 +89,7 @@ public class NotesCmd extends BukkitCommand {
     }
 
     private void addNote(CommandSender sender, String option, String note) {
+        Messages messages = StaffPlus.get().messages;
         Player player = Bukkit.getPlayer(option);
 
         if (player != null) {
@@ -97,6 +100,7 @@ public class NotesCmd extends BukkitCommand {
     }
 
     private void sendHelp(CommandSender sender) {
+        Messages messages = StaffPlus.get().messages;
         message.send(sender, "&7" + message.LONG_LINE, "");
         message.send(sender, "&b/" + getName() + " &7" + getUsage(), messages.prefixGeneral);
         message.send(sender, "&b/" + getName() + " get &7[player]", messages.prefixGeneral);

@@ -13,8 +13,8 @@ import org.bukkit.entity.Player;
 public class ModeCmd extends BukkitCommand {
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
+    //private Options options = StaffPlus.get().options;
+    //private Messages messages = StaffPlus.get().messages;
 
     public ModeCmd(String name) {
         super(name);
@@ -22,6 +22,8 @@ public class ModeCmd extends BukkitCommand {
 
     @Override
     public boolean execute(CommandSender sender, String alias, String[] args) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         if (!permission.has(sender, options.permissionMode)) {
             message.send(sender, messages.noPermission, messages.prefixGeneral);
             return true;

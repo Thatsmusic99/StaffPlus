@@ -1,5 +1,6 @@
 package net.shortninja.staffplus.player.attribute.mode;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.shortninja.staffplus.StaffPlus;
 
 import net.shortninja.staffplus.player.User;
@@ -55,6 +56,7 @@ public class ModeCoordinator {
     }
 
     public void addMode(Player player) {
+       // MessageCoordinator messages = new MessageCoordinator(StaffPlus.get());
         UUID uuid = player.getUniqueId();
         IUser user = userManager.get(uuid);
         if(user == null)
@@ -71,6 +73,8 @@ public class ModeCoordinator {
             return;
         }
 
+        if(StaffPlus.get().usesPlaceholderAPI)
+            PlaceholderAPI.setPlaceholders(player,"%mode%");
         JavaUtils.clearInventory(player);
         modeUsers.put(uuid, modeData);
         setPassive(player, user);

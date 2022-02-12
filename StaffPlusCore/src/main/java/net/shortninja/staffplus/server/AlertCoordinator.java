@@ -21,8 +21,6 @@ public class AlertCoordinator {
     private static Set<Location> notifiedLocations = new HashSet<Location>();
     private PermissionHandler permission = StaffPlus.get().permission;
     private MessageCoordinator message = StaffPlus.get().message;
-    private Options options = StaffPlus.get().options;
-    private Messages messages = StaffPlus.get().messages;
     private UserManager userManager = StaffPlus.get().userManager;
 
     public boolean hasNotified(Location location) {
@@ -42,6 +40,8 @@ public class AlertCoordinator {
     }
 
     public void onNameChange(String originalName, String newName) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         if (!options.alertsNameNotify) {
             return;
         }
@@ -60,6 +60,8 @@ public class AlertCoordinator {
     }
 
     public void onMention(IUser user, String mentioner) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         if (!options.alertsMentionNotify || user == null || !user.getPlayer().isPresent()) {
             return;
         }
@@ -71,6 +73,8 @@ public class AlertCoordinator {
     }
 
     public void onXray(String miner, int amount, Material type, int lightLevel) {
+        Messages messages = StaffPlus.get().messages;
+        Options options = StaffPlus.get().options;
         if (!options.alertsXrayEnabled) {
             return;
         }

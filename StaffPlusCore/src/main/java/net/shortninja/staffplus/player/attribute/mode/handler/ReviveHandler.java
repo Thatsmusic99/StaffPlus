@@ -16,12 +16,11 @@ import java.util.UUID;
 public class ReviveHandler {
     private static Map<UUID, ModeDataVault> savedInventories = new HashMap<UUID, ModeDataVault>();
     private MessageCoordinator message = StaffPlus.get().message;
-    private Messages messages = StaffPlus.get().messages;
 
     public boolean hasSavedInventory(UUID uuid) {
         return savedInventories.containsKey(uuid);
     }
-
+    //TODO FIX REVIVE NEXT
     public void cacheInventory(Player player) {
         UUID uuid = player.getUniqueId();
         ModeDataVault modeDataVault;
@@ -44,7 +43,7 @@ public class ReviveHandler {
         player.getInventory().setArmorContents(modeDataVault.getArmor());
         if (StaffPlus.get().ninePlus)
             player.getInventory().setExtraContents(modeDataVault.getOffHand());
-        message.send(player, messages.revivedUser, messages.prefixGeneral);
+        message.send(player, StaffPlus.get().messages.revivedUser, StaffPlus.get().messages.prefixGeneral);
         savedInventories.remove(uuid);
     }
 
