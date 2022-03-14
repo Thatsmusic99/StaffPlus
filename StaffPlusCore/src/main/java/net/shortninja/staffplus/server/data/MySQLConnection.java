@@ -29,7 +29,7 @@ public class MySQLConnection {
             String host = options.mySqlHost;
             int port = options.mySqlPort;
             String db = options.database;
-            config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + db + "?autoReconnect=true&useSSL=false");
+            config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + db );
             config.setUsername(options.mySqlUser);
             config.setPassword(options.mySqlPassword);
             config.setMaximumPoolSize(5);
@@ -52,6 +52,7 @@ public class MySQLConnection {
                      "CREATE TABLE IF NOT EXISTS sp_playerdata ( GlassColor INT NOT NULL DEFAULT 0, Password VARCHAR(255) NOT NULL DEFAULT '', Player_UUID VARCHAR(36) NOT NULL, Name VARCHAR(18) NOT NULL, PRIMARY KEY (Player_UUID))  ENGINE = InnoDB;");
              PreparedStatement tickets = connection.prepareCall("CREATE TABLE IF NOT EXISTS sp_tickets ( UUID VARCHAR(36) NOT NULL, ID INT NOT NULL, Inquiry VARCHAR(255) NOT NULL, PRIMARY KEY (UUID)) ENGINE = InnoDB;");
              PreparedStatement commands = connection.prepareCall("CREATE TABLE IF NOT EXISTS sp_commands (Command_Name VARCHAR(36) NOT NULL, Command VARCHAR(36) NOT NULL, PRIMARY KEY (Command_Name)) ENGINE = InnoDB;");
+             PreparedStatement staff =    connection.prepareCall("CREATE TABLE IF NOT EXISTS sp_staff (UUID VARCHAR(36) NOT NULL, Name VARCHAR(36) NOT NULL, PRIMARY KEY (UUID)) ENGINE = InnoDB;");
              PreparedStatement alter = connection.prepareStatement("ALTER TABLE sp_playerdata CHANGE Password Password VARCHAR(255) NOT NULL DEFAULT '';")) {
             StaffPlus.get().getLogger().info("Connection established with the database!");
             commands.executeUpdate();
@@ -60,6 +61,7 @@ public class MySQLConnection {
             pw.executeUpdate();
             pr.executeUpdate();
             pd.executeUpdate();
+            staff.executeUpdate();
             alter.executeUpdate();
             connection.close();
             importData();

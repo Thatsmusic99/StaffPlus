@@ -47,6 +47,8 @@ public class StaffChatCmd extends BukkitCommand {
             }
         } else message.send(sender, messages.onlyPlayers, messages.prefixStaffChat);
 
+
+
         return true;
     }
 }

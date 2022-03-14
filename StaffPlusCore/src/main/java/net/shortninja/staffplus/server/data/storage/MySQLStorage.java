@@ -270,4 +270,22 @@ public class MySQLStorage implements IStorage {
         }
         return tickets;
     }
+
+    public void addUser(User usr){
+        try(Connection sql = MySQLConnection.getConnection();
+            PreparedStatement insert = sql.prepareStatement("INSERT INTO sp_staff(UUID,Name) " +
+                    "VALUES(?, ?);")) {
+            insert.setString(1, usr.getUuid().toString());
+            insert.setString(2, usr.getName());
+            insert.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public Map<UUID,String> getUsers(){
+        return null;
+    }
+
 }
+
