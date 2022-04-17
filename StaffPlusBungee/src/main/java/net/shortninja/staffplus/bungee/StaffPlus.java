@@ -1,13 +1,8 @@
 package net.shortninja.staffplus.bungee;
 
 import com.google.common.io.ByteStreams;
-import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.config.ConfigurationAdapter;
-import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ChatEvent;
-import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -15,46 +10,59 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import net.md_5.bungee.event.EventHandler;
 import net.md_5.bungee.event.EventPriority;
+import net.shortninja.staffplus.bungee.data.config.LanguageFile;
+import net.shortninja.staffplus.bungee.data.config.Options;
+import net.shortninja.staffplus.bungee.server.command.StaffChatCmd;
+import net.shortninja.staffplus.bungee.server.listener.ChatListener;
+import net.shortninja.staffplus.bungee.util.PermissionHandler;
 
 import java.io.*;
-import java.util.Arrays;
 
 public final class StaffPlus extends Plugin implements Listener {
 
-    public static Configuration config;
-    public static StaffPlus instance;
+    private static Configuration config;
+    private static StaffPlus instance;
+    private LanguageFile lang;
+    private Options options;
+    private PermissionHandler permissionHandler;
 
     @Override
     public void onEnable() {
         instance = this;
-        ProxyServer.getInstance().getPluginManager().registerListener(this, this);
+        permissionHandler = new PermissionHandler(this);
+        ProxyServer.getInstance().getPluginManager().registerListener(this, new ChatListener());
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
         }
-       // getProxy().getPluginManager().registerCommand(this,new StaffChatCommand("sc"));
-        File configFile = new File(getDataFolder(), "config.yml");
-        getProxy().
-        try {
-            if (!configFile.exists()) {
-                InputStream is = getResourceAsStream("config.yml");
-                configFile.createNewFile();
-                OutputStream os = new FileOutputStream(configFile);
-                ByteStreams.copy(is, os);
-                config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(),"config.yml"));
-                getLogger().info(config.getString("commands.staff-chat"));
-                ProxyServer.getInstance().getPluginManager().registerCommand(this,new StaffChatCommand(config.getString("commands.staff-chat")));
-                getProxy().getPluginManager().registerCommand(this, new StaffChatCommand(config.getString("commands.staff-chat")));
-            }else{
-                getLogger().info("Should load command");
-                config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(),"config.yml"));
-                getLogger().info(config.getString("commands.staff-chat"));
-                ProxyServer.getInstance().getPluginManager().registerCommand(this,new StaffChatCommand(config.getString("commands.staff-chat")));
-                getProxy().getPluginManager().registerCommand(this,new StaffChatCommand(config.getString("commands.staff-chat")));
-            }
-        } catch (IOException e) {
-                throw new RuntimeException("Unable to create configuration file", e);
-            }
+        Options options = new Options(this);
+        config = options.setupConfig();
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new StaffChatCmd(getConfig().getString("staff-chat-module.staff-chat-command")));
+        //lang = new LanguageFile();
 
+    }
+
+    public static StaffPlus get(){
+        return instance;
+    }
+
+    public Configuration getConfig(){
+        return config;
+    }
+
+    public Configuration getLang(){
+        return lang.get();
+    }
+
+    public LanguageFile getLangFile(){
+        return lang;
+    }
+
+    public Options getOptions(){
+        return options;
+    }
+
+    public PermissionHandler getPermissionHandler() {
+        return permissionHandler;
     }
 
     @Override
@@ -65,7 +73,7 @@ public final class StaffPlus extends Plugin implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void on(ChatEvent e) {
 
-        if (e.isCommand()) {
+       /*if (e.isCommand()) {
             final String[] split = e.getMessage().split(" ");
             final String command = split[0].substring(1);
 
@@ -95,6 +103,6 @@ public final class StaffPlus extends Plugin implements Listener {
                     ((ProxiedPlayer) e.getSender()).sendMessage(TextComponent.fromLegacyText("§cPlease specify a player."));
                 }
             }
-        }
+        }*/
     }
 }

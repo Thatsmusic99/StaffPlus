@@ -16,7 +16,7 @@ lang: "lang_en"
 
 # Whether the plugin uses BungeeCord. By default disabled.
 bungee: false
-
+test: true
 # Commands that staff will not be allowed to use at all.
 # Must have "permissions.block" permission to take effect.
 # Leave blank to disable.
@@ -43,7 +43,7 @@ glass-title: "&bChoose GUI glass color"
 reports-module:
   # Whether or not the plugin will use "/report" features.
   enabled: true
-
+  particle: false
   # The sound that is played to staff when someone is reported.
   # Set to "NONE" to disable.
   sound: ORB_PICKUP
@@ -308,6 +308,12 @@ staff-mode:
 
   # Should other staff be able to see staff that are in mode while they are not in mode.
   staff-see-staff-in-mode: false
+
+  #Should staffmode block chat
+  block-chat: true
+
+  #Should staff mode force staff chat requires block chat false
+  force-staffchat: false
 
   ############################################################
   # +------------------------------------------------------+ #
@@ -989,7 +995,7 @@ storage:
 
 # The declared version of this configuration file, used for configuration file changes.
 # Do NOT change this unless you know what you're doing (hint: just don't change it).
-config-version: 6206
+config-version: 6207
 # The interval in seconds at which auto saves will be performed.
 # The higher this is, the less lag there will be.
 auto-save: 3602

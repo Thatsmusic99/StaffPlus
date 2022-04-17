@@ -1,0 +1,8 @@
+staff-chat-module:
+  staff-chat-command: "sc"
+  staff-chat-prefix: "&dStaffChat &8»"
+  staff-chat-format: "%prefix% %player% %server%: "
+  staff-chat-handle: '@'
+permissions:
+  staff-chat: "staff.staffchat"
+  wild-card: '*'

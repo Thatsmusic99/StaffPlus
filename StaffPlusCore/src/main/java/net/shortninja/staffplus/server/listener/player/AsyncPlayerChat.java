@@ -45,8 +45,16 @@ public class AsyncPlayerChat implements Listener {
         String message = event.getMessage();
 
         if(modeCoordinator.isInMode(event.getPlayer().getUniqueId())){
-            chatHandler.sendStaffChatMessage(event.getPlayer().getDisplayName(), event.getMessage());
-            event.setCancelled(true);
+            if(options.forceStaffChat){
+                chatHandler.sendStaffChatMessage(event.getPlayer().getDisplayName(), event.getMessage());
+                event.setCancelled(true);
+                return;
+            }
+            if(options.blockChat){
+               event.setCancelled(true);
+            }
+
+
         }
 
         if (shouldCancel(player, message)) {

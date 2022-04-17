@@ -54,6 +54,8 @@ public class FreezeHandler {
             message.send(sender, messages.staffFroze.replace("%target%", player.getName()), messages.prefixGeneral);
         } else loggedOut.add(uuid);
 
+        if(userManager==null)
+            return;
         userManager.get(player.getUniqueId()).setFrozen(true);
         lastFrozenLocations.put(uuid, player.getLocation());
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 128));

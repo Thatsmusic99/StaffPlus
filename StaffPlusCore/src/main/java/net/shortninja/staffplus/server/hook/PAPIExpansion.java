@@ -66,7 +66,6 @@ public class PAPIExpansion extends PlaceholderExpansion {
         }
         if(params.equalsIgnoreCase("online")){
             StringBuilder sb = new StringBuilder();
-            sb.append("Online users: ");
             StaffPlus.get().users.values().forEach(usr -> {
                 if(!usr.isVanished())
                     sb.append(usr.getName());
