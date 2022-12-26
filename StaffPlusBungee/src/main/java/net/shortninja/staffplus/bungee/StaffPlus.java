@@ -12,6 +12,7 @@ import net.md_5.bungee.event.EventHandler;
 import net.md_5.bungee.event.EventPriority;
 import net.shortninja.staffplus.bungee.data.config.LanguageFile;
 import net.shortninja.staffplus.bungee.data.config.Options;
+import net.shortninja.staffplus.bungee.player.UserManager;
 import net.shortninja.staffplus.bungee.server.command.StaffChatCmd;
 import net.shortninja.staffplus.bungee.server.listener.ChatListener;
 import net.shortninja.staffplus.bungee.util.PermissionHandler;
@@ -25,10 +26,12 @@ public final class StaffPlus extends Plugin implements Listener {
     private LanguageFile lang;
     private Options options;
     private PermissionHandler permissionHandler;
+    private  UserManager userManager;
 
     @Override
     public void onEnable() {
         instance = this;
+        userManager = new UserManager();
         permissionHandler = new PermissionHandler(this);
         ProxyServer.getInstance().getPluginManager().registerListener(this, new ChatListener());
         if (!getDataFolder().exists()) {

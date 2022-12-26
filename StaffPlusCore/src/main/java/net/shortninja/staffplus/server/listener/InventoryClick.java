@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
@@ -32,6 +33,8 @@ public class InventoryClick implements Listener {
         ItemStack item = event.getCurrentItem();
         int slot = event.getSlot();
 
+        if(event.getInventory().getType().equals(InventoryType.CHEST) && modeCoordinator.isInMode(uuid))
+            event.setCancelled(true);
 
         if(StaffPlus.get().inventoryHandler.isInVirtualInv(uuid)||
             StaffPlus.get().viewedChest.containsKey(event.getInventory())){

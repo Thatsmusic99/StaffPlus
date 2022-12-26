@@ -221,7 +221,7 @@ public class GadgetHandler {
         Set<UUID> modeUsers = StaffPlus.get().modeCoordinator.getModeUsers();
 
         for (UUID uuid : modeUsers) {
-            Optional<Player> player = userManager.get(uuid).getPlayer();
+            Optional<Player> player = (Optional<Player>) userManager.get(uuid).getPlayer();
 
             if (!player.isPresent()) {
                 continue;

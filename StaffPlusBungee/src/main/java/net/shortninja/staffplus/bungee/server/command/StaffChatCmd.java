@@ -16,7 +16,6 @@ public class StaffChatCmd extends Command{
 
     @Override
     public void execute(CommandSender commandSender, String[] strings) {
-        System.out.println("is it getting called?");
         if(strings.length!=0) {
             String prefix = StaffPlus.get().getConfig().getString("staff-chat-module.staff-chat-prefix");
             String format = StaffPlus.get().getConfig().getString("staff-chat-module.staff-chat-format");
@@ -49,8 +48,6 @@ public class StaffChatCmd extends Command{
                     }
                 }
             }
-        }else{
-            commandSender.sendMessage("We are in the else");
-        }
+        }else{ }
     }
 }
