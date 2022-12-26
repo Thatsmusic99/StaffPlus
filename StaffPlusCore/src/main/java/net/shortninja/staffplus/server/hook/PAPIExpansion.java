@@ -1,9 +1,11 @@
 package net.shortninja.staffplus.server.hook;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import net.milkbowl.vault.chat.Chat;
 import net.shortninja.staffplus.StaffPlus;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -54,7 +56,7 @@ public class PAPIExpansion extends PlaceholderExpansion {
             });
             return sb.toString();
         }
-        if(params.equalsIgnoreCase("num_staff_online)")){
+        if(params.equalsIgnoreCase("num_staff_online")){
             AtomicInteger i = new AtomicInteger();
             StaffPlus.get().users.values().forEach((usr -> {
                 if(StaffPlus.get().permission.has(usr.getPlayer().get(),StaffPlus.get().options.permissionMode)){
@@ -76,6 +78,16 @@ public class PAPIExpansion extends PlaceholderExpansion {
             int i = (int)StaffPlus.get().users.values().stream().filter(usr -> !usr.isVanished()).count();
 
             return String.valueOf(i);
+        }
+        if(params.equalsIgnoreCase("rank_prefix")){
+            RegisteredServiceProvider<Chat> rsp = StaffPlus.get().getServer().getServicesManager().getRegistration(Chat.class);
+            return rsp.getProvider().getPlayerPrefix(p);
+        }
+        if(params.equalsIgnoreCase("is_in_mode")){
+            return String.valueOf(StaffPlus.get().modeCoordinator.isInMode(p.getUniqueId()));
+        }
+        if(params.equalsIgnoreCase("is_vanished")){
+            return String.valueOf(StaffPlus.get().userManager.get(p.getUniqueId()).isVanished());
         }
         return null;
     }

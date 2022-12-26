@@ -64,7 +64,7 @@ public class VanishHandler {
 
     public void updateVanish() {
         for (IUser user : userManager.getAll()) {
-            Optional<Player> player = user.getPlayer();
+            Optional<Player> player = (Optional<Player>) user.getPlayer();
 
             if (player.isPresent() && user.getVanishType() == VanishType.TOTAL) {
                 applyVanish(player.get(), user.getVanishType(), false);

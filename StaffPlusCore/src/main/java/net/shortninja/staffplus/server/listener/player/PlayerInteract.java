@@ -8,6 +8,7 @@ import net.shortninja.staffplus.player.attribute.mode.item.ModuleConfiguration;
 import net.shortninja.staffplus.server.compatibility.IProtocol;
 import net.shortninja.staffplus.util.lib.JavaUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Container;
 import org.bukkit.block.DoubleChest;
@@ -50,11 +51,23 @@ public class PlayerInteract implements Listener {
             return;
         }
         if (modeCoordinator.isInMode(uuid)) {
+
             if (handleInteraction(player, item, action)) {
                 event.setCancelled(true);
             }
         }
+
+        if (modeCoordinator.isInMode(uuid) && event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+
+            if (handleInteraction(player, item, action)) {
+                event.setCancelled(true);
+            }
+        }
+
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+            if(handleInteraction(player, event.getItem(), event.getAction())){
+                event.setCancelled(true);
+            }
 
             if (StaffPlus.get().thirteenPlus) {
                 if (event.getClickedBlock().getState() instanceof Container
@@ -75,6 +88,7 @@ public class PlayerInteract implements Listener {
                         StaffPlus.get().viewedChest.put(chestView, event.getClickedBlock());
                         StaffPlus.get().inventoryHandler.addVirtualUser(player.getUniqueId());
                     }
+
                 }
             } else {
 
@@ -100,9 +114,11 @@ public class PlayerInteract implements Listener {
         /*if (action != Action.RIGHT_CLICK_AIR) {
             return isHandled = false;
         }*/
-        if(!action.toString().contains("CLICK_AIR")){
+        /*if(!action.toString().contains("CLICK_AIR")){
             return isHandled = false;
-        }
+        }*/
+
+
 
         switch (gadgetHandler.getGadgetType(item, versionProtocol.getNbtString(item))) {
             case COMPASS:

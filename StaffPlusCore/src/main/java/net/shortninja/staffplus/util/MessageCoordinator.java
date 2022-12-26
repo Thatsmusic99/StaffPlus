@@ -48,6 +48,8 @@ public class MessageCoordinator extends Message {
             PlaceholderAPI.setPlaceholders(player, message);
         }
 
+        if(prefix == null)
+            player.sendMessage(colorize( message));
         if (!prefix.equals(""))
             player.sendMessage(colorize(prefix + " " + message));
         else
@@ -66,10 +68,14 @@ public class MessageCoordinator extends Message {
             }
         }
 
-        if (!prefix.equals(""))
-            sender.sendMessage(colorize(prefix + " " + message));
-        else
-            sender.sendMessage(colorize(prefix + "" + message));
+        //FIXME why is prefix null
+        if(prefix!=null) {
+            if (!prefix.equals(""))
+                sender.sendMessage(colorize(prefix + " " + message));
+            else
+                sender.sendMessage(colorize(prefix + "" + message));
+        }else
+            sender.sendMessage(colorize(message));
     }
 
     public void sendConsoleMessage(String message, boolean isError) {

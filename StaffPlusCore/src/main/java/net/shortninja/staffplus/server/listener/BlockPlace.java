@@ -23,7 +23,6 @@ public class BlockPlace implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent event) {
         UUID uuid = event.getPlayer().getUniqueId();
-
         if ((StaffPlus.get().options.modeBlockManipulation || !modeCoordinator.isInMode(uuid)) && !freezeHandler.isFrozen(uuid)) {
             return;
         }

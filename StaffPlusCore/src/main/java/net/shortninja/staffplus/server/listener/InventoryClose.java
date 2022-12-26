@@ -45,7 +45,7 @@ public class InventoryClose implements Listener {
                 if(event.getInventory().equals(inventory)){
                     if(StaffPlus.get().twelvePlus) {
                         Container container = (Container) StaffPlus.get().viewedChest.get(inventory).getState();
-                        container.getInventory().setContents(inventory.getContents());
+                        //container.getInventory().setContents(inventory.getContents());
                     }else{
                         Chest chest = (Chest) StaffPlus.get().viewedChest.get(inventory).getState();
                         chest.getInventory().setContents(inventory.getContents());

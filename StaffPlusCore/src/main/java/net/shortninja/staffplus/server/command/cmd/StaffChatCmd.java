@@ -1,5 +1,6 @@
 package net.shortninja.staffplus.server.command.cmd;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import net.shortninja.staffplus.StaffPlus;
 import net.shortninja.staffplus.player.UserManager;
 import net.shortninja.staffplus.server.chat.ChatHandler;
@@ -39,6 +40,7 @@ public class StaffChatCmd extends BukkitCommand {
             IUser user = userManager.get(((Player) sender).getUniqueId());
 
             if (user.isChatting()) {
+                
                 message.send(sender, messages.staffChatStatus.replace("%status%", messages.disabled), messages.prefixStaffChat);
                 user.setChatting(false);
             } else {
