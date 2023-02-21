@@ -23,7 +23,7 @@ import java.util.*;
 
 //TODO: replace this with something that isn't horribly coupled...
 public class Options implements IOptions {
-    private static final int CURRENT_VERSION = 6207;
+    private static final int CURRENT_VERSION = 6208;
     private static FileConfiguration config = StaffPlus.get().getConfig();
     private InputStream stream = StaffPlus.get().getResource("config.yml");
 
@@ -165,6 +165,7 @@ public class Options implements IOptions {
     public int modeFreezeSlot = config.getInt("staff-mode.freeze-module.slot") - 1;
     public boolean modeFreezeChat = config.getBoolean("staff-mode.freeze-module.chat");
     public boolean modeFreezeDamage = config.getBoolean("staff-mode.freeze-module.damage");
+    public boolean unfreezeOnLogout = configVersion < 6208 ? config.getBoolean("staff-mode.freeze-module.unfreeze-on-logout") : false;
     /*
      * CPS
      */

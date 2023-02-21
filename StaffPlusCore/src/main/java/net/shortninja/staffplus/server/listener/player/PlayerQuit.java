@@ -45,6 +45,10 @@ public class PlayerQuit implements Listener {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
             }
         }
+
+        if(StaffPlus.get().options.unfreezeOnLogout && userManager.get(event.getPlayer().getUniqueId()).isFrozen())
+            userManager.get(event.getPlayer().getUniqueId()).setFrozen(false);
+
         if(options.enderOfflineChestEnabled && !InventoryFactory.isInventoryEmpty(event.getPlayer().getEnderChest())){
             InventoryFactory.saveEnderChest(event.getPlayer());
         }
