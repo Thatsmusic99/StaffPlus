@@ -5,7 +5,7 @@
     <parent>
         <artifactId>StaffPlus</artifactId>
         <groupId>net.shortninja.staffplus</groupId>
-        <version>3.3.11.0</version>
+        <version>3.3.12.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>net.shortninja.staffplus</groupId>
             <artifactId>StaffPlusAPI</artifactId>
-            <version>3.3.11.0</version>
+            <version>3.3.12.0</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
@@ -111,6 +111,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.5.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>at.favre.lib</groupId>
             <artifactId>bcrypt</artifactId>
             <version>0.10.2</version>
@@ -123,7 +129,7 @@
         <dependency>
             <groupId>net.shortninja.staffplus</groupId>
             <artifactId>StaffPlusBungee</artifactId>
-            <version>3.3.11.0</version>
+            <version>3.3.12.0</version>
         </dependency>
     </dependencies>
 

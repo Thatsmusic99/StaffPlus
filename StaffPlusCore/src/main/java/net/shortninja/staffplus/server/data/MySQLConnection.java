@@ -29,7 +29,9 @@ public class MySQLConnection {
             String host = options.mySqlHost;
             int port = options.mySqlPort;
             String db = options.database;
+            //config.setDriverClassName("org.mariadb.jdbc.Driver");
             config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + db );
+            //config.setJdbcUrl("jdbc:mariadb://" + host + ":" + port + "/" + db );
             config.setUsername(options.mySqlUser);
             config.setPassword(options.mySqlPassword);
             config.setMaximumPoolSize(5);
