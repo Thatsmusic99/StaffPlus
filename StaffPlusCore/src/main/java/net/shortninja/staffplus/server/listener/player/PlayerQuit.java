@@ -32,7 +32,6 @@ public class PlayerQuit implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onQuit(PlayerQuitEvent event) {
-        StaffPlus.get().versionProtocol.uninject(event.getPlayer());
 
         Player player = event.getPlayer();
         manageUser(player);
