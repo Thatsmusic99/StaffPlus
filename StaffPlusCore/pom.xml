@@ -119,7 +119,7 @@
         <dependency>
             <groupId>at.favre.lib</groupId>
             <artifactId>bcrypt</artifactId>
-            <version>0.10.2</version>
+            <version>0.8.0</version>
         </dependency>
         <dependency>
             <groupId>org.inventivetalent.spiget-update</groupId>
