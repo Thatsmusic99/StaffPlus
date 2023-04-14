@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Set;
 
 public interface IProtocol {
-    String NBT_IDENTIFIER = "StaffPlus";
 
     void listVanish(Player player, boolean shouldEnable);
 

@@ -14,6 +14,7 @@ import net.shortninja.staffplus.server.PacketModifier;
 import net.shortninja.staffplus.server.chat.ChatHandler;
 import net.shortninja.staffplus.server.command.CmdHandler;
 
+import net.shortninja.staffplus.server.compatibility.IItemHandler;
 import net.shortninja.staffplus.server.compatibility.IProtocol;
 import net.shortninja.staffplus.server.data.*;
 import net.shortninja.staffplus.server.data.storage.FlatFileStorage;
@@ -36,6 +37,8 @@ import net.shortninja.staffplus.server.listener.entity.EntityDamageByEntity;
 import net.shortninja.staffplus.server.listener.entity.EntityTarget;
 import net.shortninja.staffplus.server.listener.player.*;
 import net.shortninja.staffplus.server.nms.PacketHandler;
+import net.shortninja.staffplus.server.nms.nbt.BukkitHandler;
+import net.shortninja.staffplus.server.nms.nbt.NBTHandler;
 import net.shortninja.staffplus.unordered.IUser;
 import net.shortninja.staffplus.util.MessageCoordinator;
 import net.shortninja.staffplus.util.Metrics;
@@ -89,6 +92,7 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
     public Tasks tasks;
     public Map<UUID, IUser> users;
     public ProtocolManager protocolManager;
+    public IItemHandler itemHandler;
     private MySQLConnection mySQLConnection;
     public boolean ninePlus = false;
     public HashMap<Inventory, Block> viewedChest = new HashMap<>();
@@ -217,6 +221,9 @@ public class StaffPlus extends JavaPlugin implements IStaffPlus {
         // Get ProtocolLib
         protocolManager = ProtocolLibrary.getProtocolManager();
         protocolManager.addPacketListener(new PacketHandler(this));
+
+        // Get an item handler
+        itemHandler = Bukkit.getPluginManager().isPluginEnabled("NBT-API") ? new NBTHandler() : new BukkitHandler();
         return true;
     }
 
