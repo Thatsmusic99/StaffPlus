@@ -66,7 +66,7 @@ public class PlayerInteract implements Listener {
         }
 
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
-            if(handleInteraction(player, event.getItem(), event.getAction())){
+            if(handleInteraction(player, item, event.getAction())){
                 event.setCancelled(true);
             }
 
