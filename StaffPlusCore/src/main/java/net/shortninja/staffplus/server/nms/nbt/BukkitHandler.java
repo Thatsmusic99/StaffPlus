@@ -17,7 +17,7 @@ public class BukkitHandler implements IItemHandler {
         if (meta == null) return item;
 
         // Get the namespaced key - if it doesn't work out, stop there
-        NamespacedKey key = NamespacedKey.fromString(NBT_IDENTIFIER, StaffPlus.get());
+        NamespacedKey key = NamespacedKey.fromString(NBT_IDENTIFIER.toLowerCase(), StaffPlus.get());
         if (key == null) return item;
 
         // Get the data container and namespaced key
@@ -34,7 +34,7 @@ public class BukkitHandler implements IItemHandler {
         if (meta == null) return "";
 
         // Get the namespaced key - if it doesn't work out, stop there
-        NamespacedKey key = NamespacedKey.fromString(NBT_IDENTIFIER, StaffPlus.get());
+        NamespacedKey key = NamespacedKey.fromString(NBT_IDENTIFIER.toLowerCase(), StaffPlus.get());
         if (key == null) return "";
 
         // Get the data container and namespaced key
