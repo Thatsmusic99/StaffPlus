@@ -13,7 +13,7 @@
     <modules>
         <module>StaffPlusAPI</module>
         <module>StaffPlusCore</module>
-        <!--><module>StaffPlusBungee</module> Will uncomment when module is fully ready for release-->
+        <module>StaffPlusBungee</module>
     </modules>
 
     <build>
